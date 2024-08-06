@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/productList.css}">
+</head>
+<body>
+<header>
+    <h1>Product List</h1>
+</header>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Image</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Color</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${productList}">
+        <td th:text="${product.productId}"></td>
+        <td th:text="${product.productName}"></td>
+
+        <!-- Hiển thị ảnh từ thuộc tính imageUrl -->
+        <td>
+            <img th:src="@{/images/{imageUrl}(imageUrl=${product.imageUrl})}" alt="Product Image">
+        </td>
+
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.stock}"></td>
+        <td th:text="${product.color}"></td>
+        <td th:text="${product.status ? 'Active' : 'Inactive'}"></td>
+        <td>
+            <!-- Thêm các hành động nếu cần -->
+            <a href="#" th:href="@{/initUpdateProduct/{id}(id=${product.productId})}">Edit</a>
+            <a href="#" th:href="@{/deleteProduct/{id}(id=${product.productId})}">Delete</a>
+            <a href="#" th:href="@{/detailProduct/{id}(id=${product.productId})}">detail</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<footer>
+    <a href="#" th:href="@{/initInsertProduct}">Add New Product</a>
+</footer>
+</body>
+</html>

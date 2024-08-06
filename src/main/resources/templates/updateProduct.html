@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Product</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}">
+
+
+
+</head>
+<body>
+<h1>Update Product</h1>
+<form th:action="@{/updateProduct}" th:object="${productUpdate}" method="post" enctype="multipart/form-data">
+    <input type="hidden" th:field="*{productId}" />
+
+    <div>
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" th:field="*{productName}" placeholder="Enter product name" />
+    </div>
+
+    <div>
+        <label for="filePrimary">Primary Image:</label>
+        <div>
+            <img th:src="@{/images/{imageUrl}(imageUrl=${productUpdate.imageUrl})}" alt="Current Product Image" class="img"/>
+        </div>
+        <input type="file" id="filePrimary" name="filePrimary" />
+
+    </div>
+
+    <label for="secondaryImages">Secondary Images:</label>
+
+    <div class="image-gallery">
+        <div class="image-gallery">
+            <img th:each="img : ${productUpdate.imageList}" th:src="@{/images/{imageUrl}(imageUrl=${img.imageName})}" alt="Secondary Image" class="img" />
+        </div>
+
+    </div>
+    <input type="file" id="secondaryImages" name="secondaryImages" multiple />
+    <div>
+        <label for="price">Price:</label>
+        <input type="number" id="price" th:field="*{price}" placeholder="Enter price" />
+    </div>
+
+    <div>
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" th:field="*{stock}" placeholder="Enter stock quantity" />
+
+    </div>
+
+    <div>
+        <label>Color:</label>
+        <div class="radio-group">
+            <label>
+                <input type="radio" th:field="*{color}" value="Red" th:checked="${productUpdate.color == 'Red'}" /> Red
+            </label>
+            <label>
+                <input type="radio" th:field="*{color}" value="Blue" th:checked="${productUpdate.color == 'Blue'}" /> Blue
+            </label>
+            <label>
+                <input type="radio" th:field="*{color}" value="Green" th:checked="${productUpdate.color == 'Green'}" /> Green
+            </label>
+            <label>
+                <input type="radio" th:field="*{color}" value="Yellow" th:checked="${productUpdate.color == 'Yellow'}" /> Yellow
+            </label>
+        </div>
+    </div>
+
+    <div>
+        <label>Status:</label>
+        <div class="radio-group">
+            <label>
+                <input type="radio" th:field="*{status}" value="true" th:checked="${productUpdate.status == true}" /> Active
+            </label>
+            <label>
+                <input type="radio" th:field="*{status}" value="false" th:checked="${productUpdate.status == false}" /> Inactive
+            </label>
+        </div>
+    </div>
+
+    <button type="submit">Update Product</button>
+</form>
+</body>
+</html>

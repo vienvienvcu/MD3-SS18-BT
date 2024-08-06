@@ -1,0 +1,15 @@
+
+    /* Thêm một số CSS để cải thiện giao diện */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+img {
+    max-width: 100px;
+    height: auto;
+}

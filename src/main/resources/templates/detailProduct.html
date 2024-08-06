@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Details</title>
+</head>
+<body>
+<h1>Product Details</h1>
+
+<div th:if="${product != null}">
+    <h2 th:text="${product.productName}">Product Name</h2>
+    <p>Price: <span th:text="${product.price}">Price</span></p>
+    <p>Stock: <span th:text="${product.stock}">Stock</span></p>
+    <p>Color: <span th:text="${product.color}">Color</span></p>
+    <p>Status: <span th:text="${product.status}">Status</span></p>
+
+    <div th:if="${product.imageUrl != null}">
+        <h3>Primary Image</h3>
+        <img th:src="@{/images/{image}(image=${product.imageUrl})}" alt="Primary Image" style="width:300px;"/>
+    </div>
+
+    <h3>Secondary Images</h3>
+    <div th:each="image : ${productImages}">
+        <img th:src="@{/images/{image}(image=${image.imageName})}" alt="Secondary Image" style="width:150px;"/>
+    </div>
+</div>
+
+<div th:if="${error != null}">
+    <p style="color:red;" th:text="${error}">Error</p>
+</div>
+
+<a href="#" th:href="@{/loadProducts}">Back to Product List</a>
+</body>
+</html>

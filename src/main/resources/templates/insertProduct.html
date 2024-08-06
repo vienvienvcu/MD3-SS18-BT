@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Form Elements</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}">
+</head>
+<body>
+<h1>List Product</h1>
+<form th:action="@{/insertProduct}" th:object="${product}" method="post" enctype="multipart/form-data">
+
+    <div>
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" th:field="*{productName}" placeholder="Enter product name" />
+        <span th:if="${#fields.hasErrors('productName')}" class="error" th:errors="*{productName}"></span>
+    </div>
+
+    <div>
+        <label for="filePrimary">Primary Image:</label>
+        <input type="file" id="filePrimary" name="filePrimary" />
+    </div>
+
+    <div>
+        <label for="secondaryImages">Secondary Images:</label>
+        <input type="file" id="secondaryImages" name="secondaryImages" multiple />
+    </div>
+
+    <div>
+        <label for="price">Price:</label>
+        <input type="number" id="price" th:field="*{price}" placeholder="Enter price" />
+        <span th:if="${#fields.hasErrors('price')}" class="error" th:errors="*{price}"></span>
+    </div>
+
+    <div>
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" th:field="*{stock}" placeholder="Enter stock quantity" />
+        <span th:if="${#fields.hasErrors('stock')}" class="error" th:errors="*{stock}"></span>
+    </div>
+
+    <div>
+        <label>Color:</label>
+        <div class="radio-group">
+            <label>
+                <input type="radio" th:field="*{color}" value="Red" /> Red
+            </label>
+            <label>
+                <input type="radio" th:field="*{color}" value="Blue" /> Blue
+            </label>
+            <label>
+                <input type="radio" th:field="*{color}" value="Green" /> Green
+            </label>
+            <label>
+                <input type="radio" th:field="*{color}" value="Yellow" /> Yellow
+            </label>
+        </div>
+    </div>
+
+    <div>
+        <label>Status:</label>
+        <div class="radio-group">
+            <label>
+                <input type="radio" th:field="*{status}" value="true" /> Active
+            </label>
+            <label>
+                <input type="radio" th:field="*{status}" value="false" /> Inactive
+            </label>
+        </div>
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
